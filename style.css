@@ -1,0 +1,104 @@
+html, body {
+  font-family: 'Saira', sans-serif;
+  font-size:16px;
+  margin:2rem;
+}
+
+header {
+  margin-bottom: 3rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.row {
+  display:flex;
+  justify-content: center;
+}
+
+.board {
+  margin:0 auto;
+}
+
+.case {
+  position: relative;
+  background: url("images/silver-closed.jpg") no-repeat;
+  background-size: cover;
+  height:7em;
+  width: 100%;
+
+}
+
+.rectangle {
+  background-image: url("images/dollars.jpg");
+  position: relative;
+  width:100%;
+  height:2em;
+  margin-bottom:1em;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  width: 100%;
+}
+
+.number-overlay {
+  width: 100%;
+  height: 100%;
+  text-align:center;
+}
+
+.money-text {
+  position:relative;
+  top: 13%;
+  color: black;
+  font-size: 1em;
+}
+
+.text {
+  color: black;
+  font-size: 2.5vw;
+  font-weight:bold;
+  position: relative;
+  top:30%;
+  text-align:center;
+}
+
+.low-numbers, .high-numbers {
+  display:flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+}
+
+#instructions {
+  margin: 0 auto;
+  text-align:center;
+}
+
+#mine, #offer {
+  position: absolute;
+  top: 5%;
+  border:1px solid black;
+  height: 8.5em;
+  width:12%;
+  text-align: center;
+  opacity: 0.5;
+}
+#mine {
+  left: 5%;
+  text-align: center;
+}
+
+#offer {
+  right: 5%;
+}
+
+#offer:hover, #mine:hover {
+  opacity: 1;
+}
