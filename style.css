@@ -21,7 +21,7 @@ h1 {
   margin:0 auto;
 }
 
-.case, .case-selected {
+.case, .case-selected{
   position: relative;
   background: url("images/silver-closed.jpg") no-repeat;
   background-size: cover;
@@ -31,6 +31,23 @@ h1 {
 
 .case {
   cursor:pointer;
+}
+
+.case-opened {
+  position: relative;
+  background: url("images/silver-open.jpg") no-repeat;
+  background-size: contain;
+  height:7em;
+  width: 100%;
+}
+
+.reveal {
+  position: relative;
+  background: url('images/instructions.jpg') no-repeat;
+  background-size: cover;
+  height:7em;
+  width: 100%;
+  color: white;
 }
 
 .rectangle {

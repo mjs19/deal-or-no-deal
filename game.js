@@ -12,22 +12,6 @@ selection.done(function() {
   round(rnd);
 });
 
-// var roundOne = $.Deferred();
-// roundOne.done(round(2));
-//
-// var roundTwo = $.Deferred();
-// roundTwo.done(round(3));
-//
-// var roundThree = $.Deferred();
-// roundTwo.done(round(4));
-//
-// var roundFour = $.Deferred();
-// roundTwo.done(round(5));
-//
-// var roundFive = $.Deferred();
-// roundTwo.done(finish);
-
-
 // flashing instructions
 function instructions(caseId, casesLeft, dolla){
   dolla = dolla || false;
@@ -54,11 +38,9 @@ function instructions(caseId, casesLeft, dolla){
       var t2 = `you picked case ${caseId}`
 
       if(b){
-        console.log('switch to t1');
         $('#instructions').text(t1);
         b--;
       } else {
-        console.log('switch to t2');
         $('#instructions').text(t2);
         b++;
       }
@@ -73,10 +55,12 @@ function select(){
   $('.case').off('click', select);
 
   let myId = $(this)[0].id;
+  // add empty class in case user wants to swap cases later on
+  $(this).closest('.col').attr('id', 'empty');
+
   playerCase = myId;
   let $moveMe = $('<div>').addClass('col-md-2').append($(this));
 
-  console.log($moveMe);
   var moveMe = $(this).removeClass('case').addClass('case-selected');
   $('#mine').append(moveMe).css('opacity', 1);
 
@@ -108,9 +92,12 @@ function round(r) {
     let formattedValue = addCommas(caseValue);
 
     $('#instructions').text(`case ${caseId} contains $${formattedValue}`);
-    // change case to opaque
-    $(`#${caseId}`).css('opacity', 0.2).css('cursor', 'auto');
+    // change case to opened
+    $(`#${caseId}`).removeClass('case').addClass('case-opened').css('cursor', 'auto');
+    $(`#${caseId}`).find('.text').text(`$${formattedValue}`).css('font-size', '1rem');
+
     cases[caseId-1].opened = true;
+    $(this).off();
     // change money bar
     $(`#${caseValue}`).css('opacity', '0.2');
     $(`#${caseValue}`).find('.money-text').removeClass('money-text').addClass('money-eliminated');
@@ -119,7 +106,6 @@ function round(r) {
 
     if(opened === casesToOpen){
       rnd ++;
-      console.log('stop');
       $('.case').unbind();
       var $offer = $('<span>').addClass('blink').html(`<br>You have an offer! Click box to view.`);
       $('#instructions').append($offer);
@@ -156,10 +142,10 @@ function offer(){
     `);
 
     $('#q').fadeIn(2000);
-    $('#deal').addClass('blink').css('cursor','pointer').click(finish);
+    $('#deal').addClass('blink').css('cursor','pointer').click(deal);
 
     if(rnd == state.length){
-      $('#no-deal').addClass('blink').css('cursor','pointer').click(swap);
+      $('#no-deal').addClass('blink').css('cursor','pointer').click(promptSwap);
     } else {
       $('#no-deal').addClass('blink').css('cursor','pointer').click(transition);
     }
@@ -172,12 +158,11 @@ function transition(){
   $('#deal').removeClass('blink');
   $('#no-deal').removeClass('blink');
   $('#offer h2').remove();
-  console.log('round', rnd);
   $('#instructions').text(`Open ${state[rnd-1]} more cases`);
   round(rnd);
 }
 
-function swap(){
+function promptSwap(){
   $('#q').fadeOut(1000);
   $('#deal').unbind();
   $('#no-deal').unbind();
@@ -185,22 +170,60 @@ function swap(){
   $('#no-deal').removeClass('blink');
   $('#offer h2').remove();
 
-
   var $swap = $('<button>').text('Swap');
   var $keep = $('<button>').text('Keep');
 
-  // $swap.click();
+  $swap.click(swap);
   $keep.click(reveal);
 
   $('#instructions').text('There are only two cases left. Woud you like to swap?');
   $('#instructions').append($swap).append($keep);
 }
 
-function finish(){
+function deal(){
   console.log('in prog');
+
 }
 
 function reveal(){
   var val = addCommas(cases[playerCase-1].value);
-  $('#instructions').text(`Your case contains $${val}`);
+  var id = cases[playerCase-1].id;
+  $('#instructions').text(`Your case contains...`);
+  $('#offer').hide();
+  $('#mine').text('');
+
+  var $lastCase = $('.case-selected');
+  var $lastCaseValue = cases[$lastCase.text()-1].value;
+  $(`#${$lastCaseValue}`).css('opacity', '0.2');
+  $(`#${$lastCaseValue}`).find('.money-text').removeClass('money-text').addClass('money-eliminated');
+
+
+  $lastCase.removeClass('case-selected').addClass('case-opened').css('cursor', 'auto');
+  $lastCase.find('.text').text(`$${addCommas($lastCaseValue)}`).css('font-size', '1rem');
+
+  $('#mine').append(`
+    <div class="reveal">
+      <div class="overlay">
+        <div class="text" style="color: white;">$${val}</div>
+      </div>
+    </div>
+    `).attr('id', id);
+
+
+}
+
+function swap() {
+  // save case on board
+  var $iDontWantThis = $('.case-selected');
+  var $thisBecomesMine = $('.case');
+
+  $('#empty').append($iDontWantThis);
+  $('#mine').append($thisBecomesMine);
+
+  playerCase = $thisBecomesMine[0].id;
+
+
+    $('button').remove();
+    $('#instructions').text('click your new case to open it!');
+    $('#mine').click(reveal);
 }
