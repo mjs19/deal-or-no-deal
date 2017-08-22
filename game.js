@@ -151,12 +151,16 @@ function offer(){
     }
 }
 
-function transition(){
+function stopBlinking(){
   $('#q').hide();
   $('#deal').unbind();
   $('#no-deal').unbind();
   $('#deal').removeClass('blink');
   $('#no-deal').removeClass('blink');
+}
+
+function transition(){
+  stopBlinking();
   $('#offer h2').remove();
   $('#instructions').text(`Open ${state[rnd-1]} more cases`);
   round(rnd);
@@ -181,8 +185,49 @@ function promptSwap(){
 }
 
 function deal(){
-  console.log('in prog');
+  stopBlinking();
+  $('.board').css('opacity', '0.2');
+  $('.low-numbers').css('opacity', '0.2');
+  $('.high-numbers').css('opacity', '0.2');
 
+  var $take = $('.moola').text();
+
+  var $myCaseValue = cases[playerCase - 1].value;
+
+  $('#mine').hide();
+  $('#offer').hide();
+
+  // make this into a function cuz I use it twice
+
+  $('#instructions').html(`
+    <div class="reveal">
+      <div class="overlay">
+        <div class="text" style="color: white; top:13%;">
+        It's a deal! You walk away with ${$take} </br>
+        <button type="text" id="open-mine" style="color:black;">open my case</button> <button type="text" id="refresh" style="color:black;">play again</button>
+        <div style="display:none" id="my-case-value">Your case had $${addCommas($myCaseValue)}</div>
+        <div style="display:none" id="you-win">Congrats, you got more than your case was worth!</div>
+        <div style="display:none" id="you-lose">Oops, looks like the dealer got you...</div>
+        </div>
+      </div>
+    </div>
+    `);
+
+    $('#refresh').click(function(){
+      window.location.reload();
+    });
+    $('#open-mine').click(function(){
+      $(this).off();
+      $('#my-case-value').css('display', 'block');
+
+      var $takeAsANumber = Number($take.replace(/[^0-9\.-]+/g,""));
+      if($takeAsANumber > $myCaseValue) {
+        $('#you-win').css('display', 'block');
+      } else {
+        $('#you-lose').css('display', 'block')
+      }
+
+    });
 }
 
 function reveal(){
@@ -190,7 +235,7 @@ function reveal(){
   var id = cases[playerCase-1].id;
   $('#instructions').text(`Your case contains...`);
   $('#offer').hide();
-  $('#mine').text('');
+  $('#mine').hide();
 
   var $lastCase = $('.case-selected');
   var $lastCaseValue = cases[$lastCase.text()-1].value;
@@ -201,15 +246,23 @@ function reveal(){
   $lastCase.removeClass('case-selected').addClass('case-opened').css('cursor', 'auto');
   $lastCase.find('.text').text(`$${addCommas($lastCaseValue)}`).css('font-size', '1rem');
 
-  $('#mine').append(`
+  $('#instructions').html(`
     <div class="reveal">
       <div class="overlay">
-        <div class="text" style="color: white;">$${val}</div>
+        <div class="text" style="color: white; top:13%;">
+        Nice! You walk away with $${val} </br>
+        <button type="text" id="refresh" style="color:black;">play again</button>
+        <div style="display:none" id="my-case-value">Your case had $${val}</div>
+        <div style="display:none" id="you-win">Congrats, you got more than your case was worth!</div>
+        <div style="display:none" id="you-lose">Oops, looks like the dealer got you...</div>
+        </div>
       </div>
     </div>
-    `).attr('id', id);
+    `);
 
-
+    $('#refresh').click(function(){
+      window.location.reload();
+    });
 }
 
 function swap() {
@@ -220,10 +273,16 @@ function swap() {
   $('#empty').append($iDontWantThis);
   $('#mine').append($thisBecomesMine);
 
+  // now swap their classes
+
   playerCase = $thisBecomesMine[0].id;
 
 
-    $('button').remove();
-    $('#instructions').text('click your new case to open it!');
-    $('#mine').click(reveal);
+  $('button').remove();
+  $('#instructions').text('click your new case to open it!');
+  $('#mine').click(reveal);
+}
+
+function keep() {
+
 }
