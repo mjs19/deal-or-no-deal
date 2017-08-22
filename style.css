@@ -21,13 +21,16 @@ h1 {
   margin:0 auto;
 }
 
-.case {
+.case, .case-selected {
   position: relative;
   background: url("images/silver-closed.jpg") no-repeat;
   background-size: cover;
   height:7em;
   width: 100%;
+}
 
+.case {
+  cursor:pointer;
 }
 
 .rectangle {
@@ -54,12 +57,13 @@ h1 {
   text-align:center;
 }
 
-.money-text {
+.money-text, .money-eliminated {
   position:relative;
   top: 13%;
   color: black;
   font-size: 1em;
 }
+
 
 .text {
   color: black;
@@ -101,4 +105,21 @@ h1 {
 
 #offer:hover, #mine:hover {
   opacity: 1;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+#q {
+  display:none;
+}
+
+.moola {
+  position: relative;
+  top: 10%;
 }

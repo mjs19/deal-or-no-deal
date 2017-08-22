@@ -8,25 +8,25 @@ function addCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-setup.amounts = setup.amounts.map(i => addCommas(i));
+var commas = setup.amounts.map(i => addCommas(i));
 
 // create rows of $$ amounts
 for(let i=0; i < setup.numberOfCases; i++){
   let $rectangle = $('<img>').attr('src', 'images/dollars.jpg').addClass('numbers');
   if(i < setup.numberOfCases / 2){
     $('.low-numbers').append(`
-      <div class="rectangle">
+      <div class="rectangle" id=${setup.amounts[i]}>
         <div class="number-overlay">
-          <div class="money-text">$${setup.amounts[i]}</div>
+          <div class="money-text">$${commas[i]}</div>
         </div>
       </div>
       `);
 
   } else {
     $('.high-numbers').append(`
-      <div class="rectangle">
+      <div class="rectangle" id=${setup.amounts[i]}>
         <div class="number-overlay">
-          <div class="money-text">$${setup.amounts[i]}</div>
+          <div class="money-text">$${commas[i]}</div>
         </div>
       </div>
       `);
