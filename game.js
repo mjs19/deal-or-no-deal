@@ -237,7 +237,8 @@ function reveal(){
   $('#offer').hide();
   $('#mine').hide();
 
-  var $lastCase = $('.case-selected');
+  var $lastCase = $('.board .case').length ? $('.board .case') : $('.board .case-selected');
+  console.log($lastCase);
   var $lastCaseValue = cases[$lastCase.text()-1].value;
   $(`#${$lastCaseValue}`).css('opacity', '0.2');
   $(`#${$lastCaseValue}`).find('.money-text').removeClass('money-text').addClass('money-eliminated');
