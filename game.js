@@ -1,6 +1,5 @@
 // game logic
 var interval;
-var state = [6, 5, 4, 3, 1];
 var rnd = 1;
 var playerCase;
 
@@ -73,14 +72,6 @@ function select(){
 }
 
 function round(r) {
-  // reverse flashing effects of offer text
-  // if(r > 1){
-  //   $('#q').fadeOut(1000);
-  //   $('#deal').unbind();
-  //   $('#no-deal').unbind();
-  //   $('#deal').removeClass('blink');
-  //   $('#no-deal').removeClass('blink');
-  // }
   var casesToOpen = state[r-1];
   var opened = 0;
 
@@ -191,7 +182,7 @@ function renderResults(moneyWon, caseAmount){
     <div class="reveal">
       <div class="overlay">
         <div class="text" style="color: white; top:13%;">
-        It's a deal! You walk away with $${moneyWon} </br>
+        It's a deal! You walk away with ${moneyWon} </br>
         <button type="text" id="open-mine" style="color:black; display:none">open my case</button> <button type="text" id="refresh" style="color:black;">play again</button>
         <div style="display:none" id="my-case-value">Your case had $${caseAmount}</div>
         <div style="display:none" id="you-win">Congrats, you got more than your case was worth!</div>
