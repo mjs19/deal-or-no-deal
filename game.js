@@ -154,7 +154,7 @@ function stopBlinking(){
 function transition(){
   stopBlinking();
   $('#offer h2').remove();
-  $('#instructions').text(`Open ${state[rnd-1]} more cases`);
+  $('#instructions').text(`open ${state[rnd-1]} more cases`);
   round(rnd);
 }
 
@@ -166,8 +166,8 @@ function promptSwap(){
   $('#no-deal').removeClass('blink');
   $('#offer h2').remove();
 
-  var $swap = $('<button>').text('Swap');
-  var $keep = $('<button>').text('Keep');
+  var $swap = $('<button>').addClass('choices').text('Swap');
+  var $keep = $('<button>').addClass('choices').text('Keep');
 
   $swap.click(swap);
   $keep.click(reveal);
@@ -182,7 +182,7 @@ function renderResults(moneyWon, caseAmount){
     <div class="reveal">
       <div class="overlay">
         <div class="text" style="color: white; top:13%;">
-        It's a deal! You walk away with ${moneyWon} </br>
+        Congrats! You walk away with $${moneyWon} </br>
         <button type="text" id="open-mine" style="color:black; display:none">open my case</button> <button type="text" id="refresh" style="color:black;">play again</button>
         <div style="display:none" id="my-case-value">Your case had $${caseAmount}</div>
         <div style="display:none" id="you-win">Congrats, you got more than your case was worth!</div>
@@ -233,7 +233,6 @@ function reveal(){
   $('#mine').hide();
 
   var $lastCase = $('.board .case').length ? $('.board .case') : $('.board .case-selected');
-  console.log($lastCase);
   var $lastCaseValue = cases[$lastCase.text()-1].value;
   $(`#${$lastCaseValue}`).css('opacity', '0.2');
   $(`#${$lastCaseValue}`).find('.money-text').removeClass('money-text').addClass('money-eliminated');

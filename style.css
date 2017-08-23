@@ -15,6 +15,7 @@ header {
 }
 
 h1 {
+  font-size:3rem;
   text-align: center;
 }
 
@@ -49,8 +50,8 @@ h1 {
 
 .reveal {
   position: relative;
-  background: url('images/instructions.jpg') no-repeat;
-  background-size: cover;
+  /*background: url('images/instructions.jpg') no-repeat;
+  background-size: cover;*/
   height:20em;
   width: 100%;
   color: white;
@@ -92,8 +93,9 @@ h1 {
   color: black;
   font-size: 2.5vw;
   font-weight:bold;
-  position: relative;
-  top:30%;
+  /*position: relative;
+  top:30%;*/
+  margin: 1em auto;
   text-align:center;
 }
 
@@ -145,4 +147,17 @@ h1 {
 .moola {
   position: relative;
   top: 10%;
+}
+
+
+.choices {
+  color: black;
+}
+
+/* Media Queries */
+
+@media and screen (max-width:1200px){
+  body {
+    color: white;
+  }
 }
