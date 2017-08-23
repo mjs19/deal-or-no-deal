@@ -2,7 +2,7 @@
 CODA project week
 
 ## game & rules.
-Welcome to Deal or No Deal, a gambling game modeled closely off of the hit NBC TV show! You are presented with 20 cases, each of which contain a grand prize between $50 and $1,000,000, and you must claim one (and only one) case as your own. The game progresses in stages where you'll open cases to reveal the amount inside. The instructions will tell you how many cases to open, and once you've completed the stage the Banker will make you an offer. He will try to buy your case for as *little* as possible based on the dollar amounts left. This is where you must answer the million-dollar question... Deal or No Deal? If you choose Deal, you immediately walk away with the Banker's offer but if you choose No Deal, you must continue to open cases until you complete the next stage. If you're feeling lucky you may switch cases, but only when there is one remaining on the board. But tread carefully-- you cannot undo any of your decisions!
+Welcome to Deal or No Deal, a gambling game based on the hit NBC TV show! You are presented with 20 cases, each of which contain a grand prize between $50 and $1,000,000, and you must claim one (and only one) case as your own. The game progresses in stages where you'll open cases to reveal the amount inside. The instructions will tell you how many cases to open, and once you've completed the stage the Banker will make you an offer. He will try to buy your case for as *little* as possible based on the dollar amounts left. This is where you must answer the million-dollar question... Deal or No Deal? If you choose Deal, you immediately walk away with the Banker's offer but if you choose No Deal, you must continue to open cases until you complete the next stage. If you're feeling lucky you may switch cases, but only when there is one remaining on the board. But tread carefully-- you cannot undo any of your decisions!
 
 So what will it be? Deal or No Deal?
 
@@ -35,21 +35,26 @@ Right now I have a fully-functioning game. If time allows, I'd like to add the f
 ## bugs.
 1. I used set/clearInterval to coordinate the flashing instructions and it was troubling at first. I originally wrapped setInterval() in  a function which prevented me from accessing that function later on. I solved the issue by setting the variable equal to just setInterval() instead.
 
-  Before:
-  ```
-  var interval = function(){
-    setInterval(..., 1200);
-  }
-  ```
+  <details>
+  <summary>Explanation</summary>
+    Before: <br>
+    ```
+    var interval = function(){
+      setInterval(..., 1200);
+    }
+    ```
+    <br><br>
+    After: <br>
+    ```
+    var interval = setInterval(function(){
+      .
+      .
+      .
+    }, 1200);
+    ```
+    <br><br>
+  </details>
 
-  After:
-  ```
-  var interval = setInterval(function(){
-    .
-    .
-    .
-  }, 1200);
-  ```
 
 1. If the user switches their case on the last round I would end up with this problem:
 
@@ -57,6 +62,7 @@ Right now I have a fully-functioning game. If time allows, I'd like to add the f
 
   The final gold block should match the amount in the black header but this block corresponds to the value of the case that was swapped.  <details>
   <summary>Explanation</summary>
+  <br>
     When the user chooses his/her case at the beginning of the game, that case's class changes from "case" to "selected". When a case is opened, its class changes from "case" to "opened". But if a case is swapped at the end, its retains the class "selected". I have a function that fades out the gold block matching the value of each "opened" case, so what I forgot to do here was to (1) fade out the case on the board with the "selected" class and (2) keep the block corresponding to the case that was won.
   </details>
 
