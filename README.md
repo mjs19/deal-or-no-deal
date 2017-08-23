@@ -38,20 +38,20 @@ Right now I have a fully-functioning game. If time allows, I'd like to add the f
   <details>
   <summary>Explanation</summary>
     Before: <br>
-    ```
+
     var interval = function(){
       setInterval(..., 1200);
     }
-    ```
+
     <br><br>
     After: <br>
-    ```
+
     var interval = setInterval(function(){
       .
       .
       .
     }, 1200);
-    ```
+
     <br><br>
   </details>
 

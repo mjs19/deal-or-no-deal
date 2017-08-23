@@ -62,7 +62,7 @@ for(let i = 0; i < setup.numberOfCases; i++){
 
 // set up grid rows
 for(let i=0; i < setup.rows.length; i++){
-  let $row = $('<div>').addClass('row').css('margin-bottom', '2rem');
+  let $row = $('<div>').addClass('row board-row');
   let $value = getRandom(0, setup.amounts.length);
 
   for(let j=0; j < setup.rows[i]; j++){
