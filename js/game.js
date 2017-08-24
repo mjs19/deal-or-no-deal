@@ -159,20 +159,16 @@ function transition(){
 }
 
 function promptSwap(){
-  $('#q').fadeOut(1000);
-  $('#deal').unbind();
-  $('#no-deal').unbind();
-  $('#deal').removeClass('blink');
-  $('#no-deal').removeClass('blink');
+  stopBlinking();
   $('#offer h2').remove();
 
-  var $swap = $('<button>').addClass('choices').text('Swap');
-  var $keep = $('<button>').addClass('choices').text('Keep');
+  var $swap = $('<button>').addClass('choices btn').text('Swap');
+  var $keep = $('<button>').addClass('choices btn').text('Keep');
 
   $swap.click(swap);
   $keep.click(reveal);
-
-  $('#instructions').text('There are only two cases left. Woud you like to swap?');
+  $('#instructions').text('');
+  $('#instructions').append(`There are only two cases left. Would you like to swap?`);
   $('#instructions').append($swap).append($keep);
 }
 
