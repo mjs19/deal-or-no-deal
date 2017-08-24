@@ -26,7 +26,7 @@ function horizontalBars(mq) {
     $('.added').children().each(function(key, value){
       var num = Number(value.innerText.replace(/[^0-9\.-]+/g,""));
       var final = num > 999 ? (num/1000).toFixed(1) + 'k' : num;
-      value.innerHTML = final;
+      value.innerHTML = `$${final}`;
     });
 
   } else {

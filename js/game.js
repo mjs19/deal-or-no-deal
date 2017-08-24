@@ -162,13 +162,13 @@ function promptSwap(){
   stopBlinking();
   $('#offer h2').remove();
 
-  var $swap = $('<button>').addClass('choices btn').text('Swap');
-  var $keep = $('<button>').addClass('choices btn').text('Keep');
+  var $swap = $('<button>').attr("type", "text").addClass('choices').text('Swap');
+  var $keep = $('<button>').attr("type", "text").addClass('choices').text('Keep');
 
   $swap.click(swap);
   $keep.click(reveal);
   $('#instructions').text('');
-  $('#instructions').append(`There are only two cases left. Would you like to swap?`);
+  $('#instructions').append(`There are only two cases left. Would you like to swap?<br>`);
   $('#instructions').append($swap).append($keep);
 }
 
@@ -195,7 +195,7 @@ function deal(){
   $('.low-numbers').css('opacity', '0.2');
   $('.high-numbers').css('opacity', '0.2');
 
-  var $take = $('.moola').text();
+  var $take = $('.moola').text().replace("$", "");
 
   var $myCaseValue = cases[playerCase - 1].value;
 
