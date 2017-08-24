@@ -12,10 +12,6 @@ function horizontalBars(mq) {
   var $high = $('.high-numbers');
 
   if (mq.matches) {
-    // grab $$ text
-    // var $moo = $('.money-text');
-    // $moo.each(i => $moo[i].html());
-
     // $('.rectangle').css('')
     $low.hide();
     $high.hide();
@@ -26,6 +22,12 @@ function horizontalBars(mq) {
     $newBottom.append($high.html());
 
     $('header').after($newBottom).after($newTop);
+
+    $('.added').children().each(function(key, value){
+      var num = Number(value.innerText.replace(/[^0-9\.-]+/g,""));
+      var final = num > 999 ? (num/1000).toFixed(1) + 'k' : num;
+      value.innerHTML = final;
+    });
 
   } else {
     $low.show();
