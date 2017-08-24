@@ -18,7 +18,11 @@ function instructions(caseId, casesLeft, dolla){
     // slightly different prompts w dollar amounts
     let a = 1;
     interval = setInterval(function(){
-      var t1 = `now open ${casesLeft} more cases`;
+      if(casesLeft === 1){
+        var t1 = `now open ${casesLeft} more case`;
+      } else {
+        var t1 = `now open ${casesLeft} more cases`;
+      }
       var t2 = `case ${caseId} contains $${dolla}`
 
       if(a){
@@ -76,6 +80,8 @@ function round(r) {
   var opened = 0;
 
   $('.case').click(function(){
+    var open = new Audio('sound/open.wav');
+    open.play();
     // clear interval
     clearInterval(interval);
     let caseId = $(this)[0].id;
@@ -98,10 +104,17 @@ function round(r) {
     if(opened === casesToOpen){
       rnd ++;
       $('.case').unbind();
-      var $offer = $('<span>').addClass('blink').html(`<br>You have an offer! Click box to view.`);
+      var $offer = $('<span>').addClass('blink').html(`<br>The banker is calling! Click the box to view your offer.`);
+      var $banker = new Audio('sound/banker-calling.mp3');
+      $banker.play();
+      var bankerCalling = setInterval(function(){
+        $banker.play();
+      }, 2500);
       $('#instructions').append($offer);
       $('#offer').addClass('blink');
-      $('#offer').on('click', offer);
+      // use proxy to pass arguments into function
+      $("#offer").click($.proxy(offer, null, bankerCalling));
+
     } else {
       // set new instructions
       instructions(caseId, casesToOpen-opened, formattedValue);
@@ -109,7 +122,8 @@ function round(r) {
   });
 }
 
-function offer(){
+function offer(int){
+  clearInterval(int);
   $(this).off();
   $('#instructions .blink').remove();
   $('#instructions').text('Viewing offer');
@@ -188,6 +202,9 @@ function renderResults(moneyWon, caseAmount){
 }
 
 function deal(){
+  let music = new Audio('sound/its-a-deal.mp3');
+  music.play();
+
   stopBlinking();
   $('.board').css('opacity', '0.2');
   $('.low-numbers').css('opacity', '0.2');
@@ -217,14 +234,19 @@ function deal(){
     });
 
     $('#open-mine').css('display', 'inline-block').click(function(){
+
       $(this).off();
       $('#instructions').append(buttonContent);
       $('#my-case-value').css('display', 'block');
 
       var $takeAsANumber = Number($take.replace(/[^0-9\.-]+/g,""));
       if($takeAsANumber > $myCaseValue) {
+        var clap = new Audio('sound/clap.wav');
+        clap.play();
         $('#you-win').css('display', 'block');
       } else {
+        var aww = new Audio('sound/aww.wav');
+        aww.play();
         $('#you-lose').css('display', 'block')
       }
 
@@ -243,15 +265,17 @@ function reveal(){
   $(`#${$lastCaseValue}`).css('opacity', '0.2');
   $(`#${$lastCaseValue}`).find('.money-text').removeClass('money-text').addClass('money-eliminated');
 
-
   $lastCase.removeClass('case-selected').addClass('case-opened').css('cursor', 'auto');
   $lastCase.find('.text').text(`$${addCommas($lastCaseValue)}`).css('font-size', '1rem');
 
   renderResults(val, val);
 
-    $('#refresh').click(function(){
-      window.location.reload();
-    });
+  let theme = new Audio('sound/theme.mp3');
+  theme.play();
+
+  $('#refresh').click(function(){
+    window.location.reload();
+  });
 }
 
 function swap() {

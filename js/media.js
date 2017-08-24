@@ -21,7 +21,8 @@ function horizontalBars(mq) {
     $newTop.append($low.html())
     $newBottom.append($high.html());
 
-    $('header').after($newBottom).after($newTop);
+    $('header').after($newTop);
+    $('.board').append($newBottom);
 
     $('.added').children().each(function(key, value){
       var num = Number(value.innerText.replace(/[^0-9\.-]+/g,""));
