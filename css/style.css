@@ -71,9 +71,10 @@ h2 {
 
 .reveal {
   position: relative;
+  box-sizing:content-box;
   /*background: url('images/instructions.jpg') no-repeat;
   background-size: cover;*/
-  height:20em;
+  height:10rem;
   width: 100%;
   color: white;
 }

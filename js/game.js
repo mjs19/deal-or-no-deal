@@ -174,19 +174,17 @@ function promptSwap(){
 
 function renderResults(moneyWon, caseAmount){
   caseAmount = addCommas(caseAmount) || " ";
-  $('#instructions').html(`
+  let html = `
     <div class="reveal">
       <div class="overlay">
         <div class="text" style="color: white; top:13%;">
         Congrats! You walk away with $${moneyWon} </br>
-        <button type="text" id="open-mine" style="color:black; display:none">open my case</button> <button type="text" id="refresh" style="color:black;">play again</button>
-        <div style="display:none" id="my-case-value">Your case had $${caseAmount}</div>
-        <div style="display:none" id="you-win">Congrats, you got more than your case was worth!</div>
-        <div style="display:none" id="you-lose">Oops, looks like the dealer got you...</div>
         </div>
+        <button type="text" id="refresh" style="color:black;">play again</button>
       </div>
     </div>
-    `);
+    `
+  $('#instructions').text("").append(html).hide().slideDown();
 }
 
 function deal(){
@@ -204,11 +202,23 @@ function deal(){
 
   renderResults($take, $myCaseValue);
 
+  let openMyCase = `
+  <button type="text" id="open-mine" style="color:black; display:none">open my case</button>
+  `;
+  $('.reveal .overlay').append(openMyCase);
+
+  let buttonContent = `
+    <div style="display:none" id="my-case-value">Your case contained $${addCommas($myCaseValue)}.</div>
+    <div style="display:none" id="you-win">Congrats, you got more than your case was worth!</div>
+    <div style="display:none" id="you-lose">Oops, looks like the dealer got you...</div>`;
+
     $('#refresh').click(function(){
       window.location.reload();
     });
+
     $('#open-mine').css('display', 'inline-block').click(function(){
       $(this).off();
+      $('#instructions').append(buttonContent);
       $('#my-case-value').css('display', 'block');
 
       var $takeAsANumber = Number($take.replace(/[^0-9\.-]+/g,""));
