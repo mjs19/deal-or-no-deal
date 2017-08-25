@@ -3,12 +3,20 @@ $('.all').hide();
 $(document).ready(function() {
   var theme = new Audio('sound/theme.mp3');
   theme.play();
+  console.log('theme volume', theme.volume);
+
+  // $('.vol').append(`
+  //   <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>
+  //   `);
+  // $(".vol").click($.proxy(triggerVolume, null, "off"));
+
 
   var loop = setInterval(function(){
     theme.play();
   }, 1000);
 
   var $name = `
+  <form>
     <div class="intro">
       <h1> Deal or No Deal </h1>
         <div class="row">
@@ -22,10 +30,36 @@ $(document).ready(function() {
           </div>
         </div>
     </div>
+    </form>
+
       `
   $('body').append($name).hide().fadeIn('slow');
 
+  $('form').submit(function(event){
+
+  event.preventDefault();
+  isEmpty();
+
+});
+
   $('button').click(isEmpty);
+
+  // function triggerVolume(o){
+  //   $(this).remove();
+  //   if(o == "on"){
+  //     // trigger on
+  //     $('.vol').append(`
+  //       <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>
+  //       `);
+  //   } else if (o == "off"){
+  //     console.log("off");
+  //     // trigger off
+  //     $('.vol').append(`
+  //       <i class="fa fa-volume-off fa-2x" aria-hidden="true"></i>
+  //       `);
+  //   }
+  //
+  // }
 
   function isEmpty(){
     event.preventDefault();

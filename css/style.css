@@ -10,6 +10,11 @@ html, body {
 
 }
 
+.vol {
+  position: absolute;
+  top:0;
+}
+
 .table {
   width:80%;
   margin: 0 auto;
@@ -172,7 +177,7 @@ h2 {
   margin-right:4rem;
 }
 
-#hs, #refresh, #open-mine {
+#hs, #refresh, #open-mine, #swap, #keep {
   margin:0.2em;
 }
 
