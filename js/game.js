@@ -298,6 +298,11 @@ function reveal(){
 
   renderResults(val, val);
 
+  var date = new Date();
+  var timestamp = date.getTime();
+
+  writeUserData(timestamp, getPlayerName(), cases[playerCase-1].value);
+
   let theme = new Audio('sound/theme.mp3');
   theme.play();
 
