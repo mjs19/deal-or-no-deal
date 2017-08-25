@@ -1,6 +1,5 @@
 console.log('connected to titlePage');
 
-
 $('button[name="game"]').click(function(){
   window.location.href = "index.html";
 });
@@ -28,12 +27,12 @@ function writeUserData(time, user, score) {
 
 function renderScores(){
   var $table = `
-  <table class="table">
+  <table class="table" style="margin-top: 3%;">
     <thead>
       <tr>
-        <th>Timestamp</th>
+        <th>Rank</th>
         <th>Name</th>
-        <th>Winnings</th>
+        <th>Prize</th>
       </tr>
     </thead>
     <tbody>
@@ -43,19 +42,21 @@ function renderScores(){
   $('body').append($table);
   var ref = database.ref();
 
-// Attach an asynchronous callback to read the data at our posts reference
+  // Attach an asynchronous callback to read the data at our posts reference
   ref.on("value", function(snapshot) {
     var object = Object.values(snapshot.val());
-    console.log(object);
+    object.sort(function(a,b){return a.score-b.score}).reverse();
+    // get top ten scores
+    object = object.slice(0, 10);
 
     object.forEach(function(i){
+      let rank = object.indexOf(i) + 1;
       let name = i.name;
       let score = i.score;
-      // let date = new Date();
-      // let value = date.getTime();
+
       let newRow = `
           <tr>
-            <th scope="row">${object.indexOf(i)+1}</th>
+            <th scope="row">${rank}</th>
             <td>${name}</td>
             <td>$${addCommas(score)}</td>
           </tr>
@@ -101,4 +102,4 @@ function getRank(i){
   });
 }
 
-renderScores();
+// renderScores();

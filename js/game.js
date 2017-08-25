@@ -3,20 +3,6 @@ var interval;
 var rnd = 1;
 var playerCase;
 
-
-
-// $(document).ready(function() {
-//   // check to see if "all" class (board, numbers, etc.) was made visible
-//   var ready = $('.all').offsetParent === null;
-//   console.log('ready?', ready);
-//   if(ready){
-//     thinking.play();
-//     var backgroundMusic = setInterval(function(){
-//       thinking.play();
-//     }, 500);
-//   }
-// });
-
 // remove highscores table
 $('table').remove();
 
@@ -165,6 +151,8 @@ function offer(int){
     <h2 class="moola">$${o}</h2>
     `);
 
+    var $nameHeader = $('<h2>').attr('id', 'player').text(`${getPlayerName()},`).css('text-align', 'center');
+    $('header').prepend($nameHeader);
     $('#q').fadeIn(2000);
     $('#deal').addClass('blink').css('cursor','pointer').click(deal);
 
@@ -176,6 +164,7 @@ function offer(int){
 }
 
 function stopBlinking(){
+  $('#player').remove();
   $('#q').hide();
   $('#deal').unbind();
   $('#no-deal').unbind();
@@ -218,6 +207,12 @@ function renderResults(moneyWon, caseAmount){
     </div>
     `
   $('#instructions').text("").append(html).hide().slideDown('slow');
+
+  $('#hs').click(function(){
+    $(this).off();
+    $('header').nextAll().hide();
+    renderScores();
+  });
 }
 
 function deal(){
@@ -231,6 +226,8 @@ function deal(){
   $('.board').css('opacity', '0.2');
   $('.low-numbers').css('opacity', '0.2');
   $('.high-numbers').css('opacity', '0.2');
+  // fades media bars if viewing on mobile device
+  $('.added').css('opacity', '0.2');
 
   var $take = $('.moola').text().replace("$", "");
   var $takeAsANumber = Number($take.replace(/[^0-9\.-]+/g,""));
@@ -256,23 +253,11 @@ function deal(){
       window.location.reload();
     });
 
-    // get & write rank of player's score
-    // var doThis = function(){
-    //   return getRank($takeAsANumber);
-    // }
-    //
-    // $.when( doThis() ).done(function(){
-    //   setTimeout(console.log('do this', $(this)), 2000);
-    //   writeUserData(, 'marita', $takeAsANumber);
-    // });
     var date = new Date();
-    var value = date.getTime();
+    var timestamp = date.getTime();
 
-    writeUserData(value, 'marita', $takeAsANumber);
+    writeUserData(timestamp, getPlayerName(), $takeAsANumber);
 
-    $('#hs').click(function(){
-      window.open('highscores.html', '_blank');
-    })
 
     $('#open-mine').css('display', 'inline-block').click(function(){
 

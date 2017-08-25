@@ -8,11 +8,11 @@ html, body {
   background: -webkit-linear-gradient(to right, #232526, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #232526, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  /*
-  background-image: url('../images/black-background.jpg');
-  background-size: cover;
-  */
+}
 
+.table {
+  width:80%;
+  margin: 0 auto;
 }
 
 .intro {
@@ -172,9 +172,18 @@ h2 {
   margin-right:4rem;
 }
 
+#hs, #refresh, #open-mine {
+  margin:0.2em;
+}
+
 button:hover {
   animation: pop 0.3s linear 1;
 }
+
+.btn-secondary {
+  margin-top: 0;
+}
+
 
 @keyframes pop{
   50%  {transform: scale(1.2);}
@@ -277,6 +286,9 @@ button:hover {
 
 
 @media screen and (max-width: 990px){
+  button {
+    margin-top: 0.4em;
+  }
   .reveal {
     height:15rem;
   }

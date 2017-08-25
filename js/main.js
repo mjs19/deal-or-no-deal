@@ -1,20 +1,5 @@
 $('.all').hide();
 
-var thinking = new Audio('sound/thinking.mp3');
-var backgroundMusic;
-
-function playBackground() {
-  thinking.play();
-  backgroundMusic = setInterval(function(){
-    thinking.play();
-  }, 500);
-}
-
-function stopBackground(){
-  thinking.pause();
-  clearInterval(backgroundMusic);
-}
-
 $(document).ready(function() {
   var theme = new Audio('sound/theme.mp3');
   theme.play();
@@ -57,6 +42,27 @@ $(document).ready(function() {
     }
   }
 });
+
+var playerName;
+var thinking = new Audio('sound/thinking.mp3');
+var backgroundMusic;
+
+function playBackground() {
+  thinking.play();
+  backgroundMusic = setInterval(function(){
+    thinking.play();
+  }, 500);
+}
+
+function stopBackground(){
+  thinking.pause();
+  clearInterval(backgroundMusic);
+}
+
+function getPlayerName(){
+  return playerName;
+}
+
 
 var setup = {
   numberOfCases: 20,
