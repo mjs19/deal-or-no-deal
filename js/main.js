@@ -1,3 +1,4 @@
+
 var setup = {
   numberOfCases: 20,
   rows: [5,5,5,5],

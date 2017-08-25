@@ -1,0 +1,15 @@
+body {
+  background-color: black;
+  color:white;
+}
+
+nav {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+nav button {
+  margin:1rem;
+  color:black;
+}

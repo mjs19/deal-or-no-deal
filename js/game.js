@@ -3,6 +3,9 @@ var interval;
 var rnd = 1;
 var playerCase;
 
+// remove highscores table
+$('table').remove();
+
 $('.case').on('click', select);
 
 // using deferred objects here
@@ -194,11 +197,12 @@ function renderResults(moneyWon, caseAmount){
         <div class="text" style="color: white; top:13%;">
         Congrats! You walk away with $${moneyWon} </br>
         </div>
+        <button type="text" id="hs" style="color:black;">see highscores</button>
         <button type="text" id="refresh" style="color:black;">play again</button>
       </div>
     </div>
     `
-  $('#instructions').text("").append(html).hide().slideDown();
+  $('#instructions').text("").append(html).hide().slideDown('slow');
 }
 
 function deal(){
@@ -211,6 +215,7 @@ function deal(){
   $('.high-numbers').css('opacity', '0.2');
 
   var $take = $('.moola').text().replace("$", "");
+  var $takeAsANumber = Number($take.replace(/[^0-9\.-]+/g,""));
 
   var $myCaseValue = cases[playerCase - 1].value;
 
@@ -233,13 +238,30 @@ function deal(){
       window.location.reload();
     });
 
+    // get & write rank of player's score
+    // var doThis = function(){
+    //   return getRank($takeAsANumber);
+    // }
+    //
+    // $.when( doThis() ).done(function(){
+    //   setTimeout(console.log('do this', $(this)), 2000);
+    //   writeUserData(, 'marita', $takeAsANumber);
+    // });
+    var date = new Date();
+    var value = date.getTime();
+
+    writeUserData(value, 'marita', $takeAsANumber);
+
+    $('#hs').click(function(){
+      window.open('title.html', '_blank');
+    })
+
     $('#open-mine').css('display', 'inline-block').click(function(){
 
       $(this).off();
       $('#instructions').append(buttonContent);
       $('#my-case-value').css('display', 'block');
 
-      var $takeAsANumber = Number($take.replace(/[^0-9\.-]+/g,""));
       if($takeAsANumber > $myCaseValue) {
         var clap = new Audio('sound/clap.wav');
         clap.play();
