@@ -1,3 +1,62 @@
+$('.all').hide();
+
+var thinking = new Audio('sound/thinking.mp3');
+var backgroundMusic;
+
+function playBackground() {
+  thinking.play();
+  backgroundMusic = setInterval(function(){
+    thinking.play();
+  }, 500);
+}
+
+function stopBackground(){
+  thinking.pause();
+  clearInterval(backgroundMusic);
+}
+
+$(document).ready(function() {
+  var theme = new Audio('sound/theme.mp3');
+  theme.play();
+
+  var loop = setInterval(function(){
+    theme.play();
+  }, 1000);
+
+  var $name = `
+    <div class="intro">
+      <h1> Deal or No Deal </h1>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group input-group-lg">
+              <input type="text" class="form-control" name="question" placeholder="enter contestant name">
+              <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button">Lets play!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+    </div>
+      `
+  $('body').append($name).hide().fadeIn('slow');
+
+  $('button').click(isEmpty);
+
+  function isEmpty(){
+    event.preventDefault();
+    if($('input').val() == "")
+    {
+       alert('enter your name first!')
+    } else {
+      theme.pause();
+      clearInterval(loop);
+      playerName = $('input').val();
+      $('.intro').remove();
+      $('.all').fadeIn('slow');
+      playBackground();
+    }
+  }
+});
 
 var setup = {
   numberOfCases: 20,
@@ -81,3 +140,4 @@ for(let i=0; i < setup.rows.length; i++){
   }
   $('.board').prepend($row);
 }
+// make highscores table appear

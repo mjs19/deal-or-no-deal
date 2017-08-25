@@ -15,6 +15,11 @@ html, body {
 
 }
 
+.intro {
+  position: absolute;
+  top: 30%;
+}
+
 header {
   margin-top: 8vh;
 }

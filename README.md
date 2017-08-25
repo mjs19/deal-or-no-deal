@@ -2,12 +2,10 @@
 CODA project week
 
 ## game & rules.
-Welcome to Deal or No Deal, a gambling game based on the hit NBC TV show! You are presented with 20 cases, each of which contain a grand prize between $50 and $1,000,000, and you must claim one (and only one) case as your own. The game progresses in stages where you'll open cases to reveal the amount inside. The instructions will tell you how many cases to open, and once you've completed the stage the Banker will make you an offer. He will try to buy your case for as *little* as possible based on the dollar amounts left. This is where you must answer the million-dollar question... Deal or No Deal? If you choose Deal, you immediately walk away with the Banker's offer but if you choose No Deal, you must continue to open cases until you complete the next stage. If you're feeling lucky you may switch cases, but only when there is one remaining on the board. But tread carefully-- you cannot undo any of your decisions!
-
-So what will it be? Deal or No Deal?
+Welcome to Deal or No Deal! In this gambling game based on the hit NBC TV show you must choose one of 20 cases each containing a grand prize between $50 and $1,000,000. Once you have your case, you'll open the other cases in stages to reveal amount inside. After each stage the Banker will make you an offer. He will try to buy your case for as *little* as possible based on the dollar amounts left. This is where you must answer the million-dollar question... Deal or No Deal? If you choose Deal, you immediately walk away with the Banker's offer but if you choose No Deal, you must continue to open cases until you complete the next stage. If you're feeling lucky you may switch cases but only at the very end. But be advised, you cannot undo any of your decisions so choose wisely!
 
 ## technologies used.
-This game was built using HTML, CSS, and Javascript.
+This game was built using HTML, CSS, and Javascript. I used Firebase for the highscores table.
 
 ## process/approach.
 
@@ -73,6 +71,7 @@ Right now I have a fully-functioning game. If time allows, I'd like to add the f
 * Wins
   * having a MVP after day 2
   * writing clean code that is reused for each stage of the game
+  * creating a highscores table by reading and writing data to Firebase (definitely my highest high)
 * Challenges
   * finding an accurate banker's formula on the internet
   * making the page responsive when browser is resized, or when viewed on a mobile device

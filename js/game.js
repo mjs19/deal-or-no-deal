@@ -3,6 +3,20 @@ var interval;
 var rnd = 1;
 var playerCase;
 
+
+
+// $(document).ready(function() {
+//   // check to see if "all" class (board, numbers, etc.) was made visible
+//   var ready = $('.all').offsetParent === null;
+//   console.log('ready?', ready);
+//   if(ready){
+//     thinking.play();
+//     var backgroundMusic = setInterval(function(){
+//       thinking.play();
+//     }, 500);
+//   }
+// });
+
 // remove highscores table
 $('table').remove();
 
@@ -127,6 +141,7 @@ function round(r) {
 
 function offer(int){
   clearInterval(int);
+
   $(this).off();
   $('#instructions .blink').remove();
   $('#instructions').text('Viewing offer');
@@ -206,6 +221,9 @@ function renderResults(moneyWon, caseAmount){
 }
 
 function deal(){
+  // clear thinking music
+  stopBackground();
+
   let music = new Audio('sound/its-a-deal.mp3');
   music.play();
 
@@ -253,7 +271,7 @@ function deal(){
     writeUserData(value, 'marita', $takeAsANumber);
 
     $('#hs').click(function(){
-      window.open('title.html', '_blank');
+      window.open('highscores.html', '_blank');
     })
 
     $('#open-mine').css('display', 'inline-block').click(function(){
@@ -276,6 +294,9 @@ function deal(){
 }
 
 function reveal(){
+  // clear thinking music
+  stopBackground();
+
   var val = addCommas(cases[playerCase-1].value);
   var id = cases[playerCase-1].id;
   $('#instructions').text(`Your case contains...`);
