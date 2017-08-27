@@ -353,7 +353,7 @@ button:hover {
 
 }
 
-@media screen and (min-width: 1550px){
+@media screen and (min-width: 1500px){
   /* fix case cover/contain issue */
   .case, .case-opened {
     background-size: 100% 100%;
