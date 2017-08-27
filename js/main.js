@@ -5,12 +5,6 @@ $(document).ready(function() {
   theme.play();
   console.log('theme volume', theme.volume);
 
-  // $('.vol').append(`
-  //   <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>
-  //   `);
-  // $(".vol").click($.proxy(triggerVolume, null, "off"));
-
-
   var loop = setInterval(function(){
     theme.play();
   }, 1000);

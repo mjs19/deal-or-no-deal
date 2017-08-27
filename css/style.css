@@ -3,7 +3,6 @@ html, body {
   font-size:16px;
   color:white;
   height:100vh;
-
   background: #232526;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #232526, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #232526, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -40,15 +39,6 @@ footer {
     margin: auto;
     background-image: url('../images/dond.jpg');
     background-size:cover;
-    /*background-color:black;*/
-
-	  /*border: 5px solid transparent;
-
-	  -moz-border-image: -moz-linear-gradient(top left, #C9AA69 0%, #B27618 50%, #D6AB4C 100%);
-	  -webkit-border-image: -webkit-linear-gradient(top left, #C9AA69 0%, #B27618 50%, #D6AB4C 100%);
-	  border-image: linear-gradient(to bottom right, #C9AA69 0%, #B27618 50%, #D6AB4C 100%);
-
-	  border-image-slice: 1;*/
 	}
 
 h1 {
@@ -60,13 +50,6 @@ h2 {
   font-size:2em;
 }
 
-.howie {
-  background-image: url('../images/howie.jpg');
-  background-size:cover;
-  background-repeat: no-repeat;
-  height:100%;
-  width:100%;
-}
 
 .row {
   display:flex;
@@ -115,8 +98,6 @@ h2 {
 .reveal {
   position: relative;
   box-sizing:content-box;
-  /*background: url('images/instructions.jpg') no-repeat;
-  background-size: cover;*/
   height:10rem;
   width: 100%;
   color: white;
@@ -207,15 +188,6 @@ button:hover {
   width: 14.5%;
   text-align: center;
   opacity: 0.5;
-  /*background:
-    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-    background-color: #131313;
-    background-size: 20px 20px;*/
 }
 
 
@@ -372,9 +344,6 @@ button:hover {
 
 }
 
-/*@media screen and (max-width: 1500px) {
-}*/
-
 @media screen and (max-width: 1200px) {
 
     .col-md-2 {
@@ -387,6 +356,6 @@ button:hover {
 @media screen and (min-width: 1550px){
   /* fix case cover/contain issue */
   .case, .case-opened {
-    background-size: contain;
+    background-size: 100% 100%;
   }
 }
